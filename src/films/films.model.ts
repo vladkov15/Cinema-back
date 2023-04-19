@@ -1,26 +1,30 @@
 import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript';
 import { Booking } from 'src/booking/booking.model';
+import { Seat } from 'src/seats/seats.model';
 
-interface UserCreationAttr{
-    email: string,
-    name: string,
-    second_name: string,
-    password: string
+interface FilmCreationAttr{
+    id: number,
+    title: string,
+    description: string,
+    rating: string,
+    poster_url: string
 }
 
-@Table({ tableName: 'users' })
-export class User extends Model<User, UserCreationAttr> {
+@Table({ tableName: 'films' })
+export class Film extends Model<Film, FilmCreationAttr> {
   @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
   id: number;
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
-  email: string;
+  title: string;
   @Column({ type: DataType.STRING, allowNull: false })
-  name: string;
+  description: string;
   @Column({ type: DataType.STRING, allowNull: false })
-  second_name: string;
+  rating: string;
   @Column({ type: DataType.STRING, allowNull: false })
-  password: string;
+  poster_url: string
+  @HasMany(() => Seat)
+  seats: Seat[];
+
   @HasMany(() => Booking)
   bookings: Booking[];
 }
-
