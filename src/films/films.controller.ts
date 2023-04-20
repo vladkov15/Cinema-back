@@ -1,7 +1,20 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Res,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { FilmsService } from './films.service';
 import { CreateFilmDTO } from './dto/create-films.dto';
-
+import { Response } from 'express';
+import * as fs from 'fs/promises';
+import { FileInterceptor } from '@nestjs/platform-express';
+import * as path from 'path';
 
 @Controller('films')
 export class FilmsController {
@@ -13,7 +26,37 @@ export class FilmsController {
   }
 
   @Get()
-  getAll(){
-    return this.filmsService.getAllFillms()
+  getAll() {
+    return this.filmsService.getAllFillms();
+  }
+}
+
+@Controller('images')
+export class ImagesController {
+  @Get(':filename')
+  async getImage(@Param('filename') filename: string, @Res() res: Response) {
+    const path = `public/images/${filename}`;
+
+    const exists = await fs
+      .access(path, fs.constants.F_OK)
+      .then(() => true)
+      .catch(() => false);
+    if (exists) {
+      res.sendFile(path, { root: '.' });
+    } else {
+      res.status(404).send('Image not found');
+    }
+  }
+
+  @Post()
+  @UseInterceptors(FileInterceptor('image'))
+  async uploadImage(@UploadedFile() file: Express.Multer.File) {
+    if (!file) {
+      throw new BadRequestException('No file uploaded');
+    }
+    const filename = file.originalname;
+    const filePath = path.join(__dirname, '..', '..', 'public', 'images', filename);
+    await fs.writeFile(filePath, file.buffer);
+    return { message: 'Image uploaded successfully' };
   }
 }
