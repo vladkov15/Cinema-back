@@ -1,9 +1,19 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ExpressAdapter } from '@nestjs/platform-express';
+import cors from 'cors'
 
 async function start() {
   const PORT = process.env.PORT || 5000;
-  const app = await NestFactory.create(AppModule);
+  const expressApp = new ExpressAdapter();
+  const app = await NestFactory.create(AppModule, expressApp);
+  const corsOptions = {
+    origin: 'http://localhost:3000',
+    allowedHeaders: 'Content-Type,Authorization',
+    methods: 'GET,PUT,POST,DELETE,OPTIONS'
+  };
+  app.use(require('cors')(corsOptions)); 
+ 
   await app.listen(PORT, () => {
     console.log(`Started on ${PORT}`);
   });

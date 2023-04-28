@@ -6,7 +6,7 @@ import { Film } from 'src/films/films.model';
 import { Seat } from 'src/seats/seats.model';
 import { Booking } from 'src/booking/booking.model';
 import { Session } from './sessions.model';
-import { SessionsController } from './services.controller';
+import { SessionsController } from './sessions.controller';
 
 @Module({
   imports: [

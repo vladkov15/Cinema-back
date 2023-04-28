@@ -13,6 +13,12 @@ export class BookingService {
     return this.bookingModel.findAll({include :{all: true}});
   }
 
+  async findAllBySessionId(id: number): Promise<Booking[]> {
+    return this.bookingModel.findAll({where :{session_id: id}});
+  }
+  async findAllByUserId(id: number): Promise<Booking[]> {
+    return this.bookingModel.findAll({where :{user_id: id}});
+  }
   async create(bookingData: Booking): Promise<Booking> {
     return this.bookingModel.create(bookingData);
   }

@@ -15,6 +15,14 @@ export class SessionsService {
     return this.sessionModel.findByPk(id);
   }
 
+  async findOneByFilmId(id: number): Promise<Session[]>{
+    return this.sessionModel.findAll({ include :{all: true} ,where:{film_id: id}})
+  }
+
+  // async findOneByUserId(id: number): Promise<Session[]>{
+  //   return this.sessionModel.findAll({ include :{all: true} ,where:{user_id: id}})
+  // }
+
   async create(createSessionDto: any): Promise<Session> {
     return this.sessionModel.create(createSessionDto);
   }

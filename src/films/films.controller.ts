@@ -29,6 +29,14 @@ export class FilmsController {
   getAll() {
     return this.filmsService.getAllFillms();
   }
+
+  @Get(':id')
+  getFilm(@Param('id') id: number){
+    console.log(id);
+    
+    return this.filmsService.getFilmById(id);
+  }
+
 }
 
 @Controller('images')
@@ -55,7 +63,7 @@ export class ImagesController {
       throw new BadRequestException('No file uploaded');
     }
     const filename = file.originalname;
-    const filePath = path.join(__dirname, '..', '..', 'public', 'images', filename);
+    const filePath = path.join( 'public', 'images', filename);
     await fs.writeFile(filePath, file.buffer);
     return { message: 'Image uploaded successfully' };
   }

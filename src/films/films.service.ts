@@ -15,7 +15,12 @@ export class FilmsService {
   }
 
   async getAllFillms() {
-    const films = await this.filmRepository.findAll({include :{all: true}});
-    return films
+    const films = await this.filmRepository.findAll({ include: { all: true } });
+    return films;
+  }
+
+  async getFilmById(id: number) {
+    const film = await this.filmRepository.findAll({ where: { id: id } });
+    return film;
   }
 }

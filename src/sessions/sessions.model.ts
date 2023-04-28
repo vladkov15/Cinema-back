@@ -36,4 +36,5 @@ interface SessionCreationAttributes {
   
     @HasMany(() => Booking)
     bookings: Booking[];
+    
   }

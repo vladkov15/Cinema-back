@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Booking } from './booking.model';
 import { BookingService } from './booking.service';
 
@@ -9,6 +9,18 @@ export class BookingController {
   @Get()
   async findAll(): Promise<Booking[]> {
     return this.bookingService.findAll();
+  }
+
+  @Get(':id')
+  getFilm(@Param('id') id: number) {
+    console.log(id);
+    return this.bookingService.findAllBySessionId(id);
+  }
+
+  @Get('user/:id')
+  getAllUsersBooking(@Param('id') id: number) {
+    console.log(id);
+    return this.bookingService.findAllBySessionId(id);
   }
 
   @Post()

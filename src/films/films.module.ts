@@ -10,8 +10,6 @@ import { Seat } from 'src/seats/seats.model';
 @Module({
   controllers: [FilmsController, ImagesController],
   providers: [FilmsService],
-  imports: [
-    SequelizeModule.forFeature([Film, Booking, Seat])
-  ]
+  imports: [SequelizeModule.forFeature([Film, Booking, Seat])],
 })
 export class FilmsModule {}

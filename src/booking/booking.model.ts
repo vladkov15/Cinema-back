@@ -17,7 +17,9 @@ interface BookingCreationAttributes {
   film_id: number;
   session_id: number;
   seat_id: number;
+  pay: boolean;
   created_at: Date;
+  booking_expiry: Date;
 }
 
 @Table({ tableName: 'bookings' })
@@ -52,6 +54,9 @@ export class Booking extends Model<Booking, BookingCreationAttributes> {
 
   @Column({ type: DataType.DATE, allowNull: false })
   created_at: Date;
+
+  @Column({ type: DataType.BOOLEAN, allowNull: false })
+  pay: boolean;
 
   @Column({ type: DataType.DATE, allowNull: false })
   booking_expiry: Date;
