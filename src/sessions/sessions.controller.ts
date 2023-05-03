@@ -15,8 +15,19 @@ export class SessionsController {
     return this.sessionsService.findOneByFilmId(filmId);
   }
 
+  @Get('/session')
+  async findOneById(@Query('session_id') sessionId: number): Promise<Session[]> {
+    console.log(sessionId);
+    return this.sessionsService.findOneBySessionId(sessionId);
+  }
+  
+  @Get('/date')
+  async findAllByDate(@Query('date') date: string): Promise<Session[]> {
+    console.log(date);
+    return this.sessionsService.findAllByDate(date)
+  }
   @Post()
-  async create(@Body() createSessionDto: any): Promise<Session> {
+  async create(@Body() createSessionDto: Session): Promise<Session> {
     return this.sessionsService.create(createSessionDto);
   }
 

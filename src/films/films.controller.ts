@@ -15,6 +15,7 @@ import { Response } from 'express';
 import * as fs from 'fs/promises';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as path from 'path';
+import { Film } from './films.model';
 
 @Controller('films')
 export class FilmsController {
@@ -36,6 +37,11 @@ export class FilmsController {
     
     return this.filmsService.getFilmById(id);
   }
+
+  // @Post()
+  // getFilmsByDate(@Body() date: any): Promise<Film> {
+  //   return this.filmsService.(date);
+  // }
 
 }
 

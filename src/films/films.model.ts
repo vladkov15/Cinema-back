@@ -23,7 +23,6 @@ export class Film extends Model<Film, FilmCreationAttr> {
   rating: string;
   @Column({ type: DataType.STRING, allowNull: false })
   poster_url: string;
-
   @HasMany(() => Session)
   session: Session[];
 }

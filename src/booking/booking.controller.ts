@@ -20,7 +20,7 @@ export class BookingController {
   @Get('user/:id')
   getAllUsersBooking(@Param('id') id: number) {
     console.log(id);
-    return this.bookingService.findAllBySessionId(id);
+    return this.bookingService.findAllByUserId(id);
   }
 
   @Post()

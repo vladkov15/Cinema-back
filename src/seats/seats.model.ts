@@ -26,7 +26,7 @@ export class Seat extends Model<Seat, SeatCreationAttributes> {
   id: number;
 
   @ForeignKey(() => Session)
-  @Column({ type: DataType.INTEGER, allowNull: false })
+  @Column({ type: DataType.INTEGER})
   session_id: number;
 
   @ForeignKey(() => Film)

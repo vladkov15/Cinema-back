@@ -23,4 +23,9 @@ export class FilmsService {
     const film = await this.filmRepository.findAll({ where: { id: id } });
     return film;
   }
+
+  // async getFilmByDate(date: Date) {
+  //   const film = await this.filmRepository.findAll({ where: { date: date } });
+  //   return film;
+  // }
 }

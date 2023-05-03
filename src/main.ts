@@ -10,13 +10,15 @@ async function start() {
   const corsOptions = {
     origin: 'http://localhost:3000',
     allowedHeaders: 'Content-Type,Authorization',
-    methods: 'GET,PUT,POST,DELETE,OPTIONS'
+    methods: 'GET,PUT,POST,DELETE,OPTIONS,PATCH'
   };
   app.use(require('cors')(corsOptions)); 
  
   await app.listen(PORT, () => {
     console.log(`Started on ${PORT}`);
+   
   });
+ 
 }
 
 start();

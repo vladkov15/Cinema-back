@@ -17,6 +17,13 @@ export class TicketsController {
     return this.ticketsService.findOne(id);
   }
 
+  @Get('user/:id')
+  async findAllByUserId(@Param('id') id: number): Promise<Ticket[]> {
+    return this.ticketsService.findAllByUserId(id);
+  }
+
+
+
   @Post()
   async create(@Body() createTicketDto: any): Promise<Ticket> {
     return this.ticketsService.create(createTicketDto);

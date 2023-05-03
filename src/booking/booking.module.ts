@@ -13,4 +13,10 @@ import { Session } from 'src/sessions/sessions.model';
   providers: [BookingService],
   imports: [SequelizeModule.forFeature([Booking, Seat, Session, Ticket, User])],
 })
-export class BookingsModule {}
+export class BookingsModule {
+  constructor(private readonly service: BookingService) {
+    setInterval(async () => {
+      await this.service.deleteOldBookings();
+      console.log('удаление неоплаченный билетов');
+    }, 300000);
+}}

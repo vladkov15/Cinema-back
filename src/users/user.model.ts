@@ -1,5 +1,6 @@
 import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript';
 import { Booking } from 'src/booking/booking.model';
+import { Ticket } from 'src/tickets/tickets.model';
 
 interface UserCreationAttr{
     email: string,
@@ -22,5 +23,8 @@ export class User extends Model<User, UserCreationAttr> {
   password: string;
   @HasMany(() => Booking)
   bookings: Booking[];
+  @HasMany(() => Ticket)
+  ticket: Ticket[];
 }
+
 

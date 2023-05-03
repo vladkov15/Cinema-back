@@ -16,10 +16,10 @@ export class SeatService {
   }
 
   async findAllById(id:number): Promise<Seat[]> {
-    return this.seatModel.findAll({include :{all: true} ,where:{film_id: id}});
+    return this.seatModel.findAll({include :{all: true} ,where:{session_id: id}});
   }
 
-  async create(seatData: Seat[]): Promise<Seat> {
+  async create(seatData: Seat): Promise<Seat> {
    return this.seatModel.create(seatData); 
   }
 }

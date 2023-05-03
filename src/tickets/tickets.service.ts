@@ -11,9 +11,16 @@ export class TicketsService {
     return this.ticketModel.findAll({include :{all: true}});
   }
 
+  
+
   async findOne(id: number): Promise<Ticket> {
     return this.ticketModel.findByPk(id);
   }
+
+  async findAllByUserId(id:number): Promise<Ticket[]> {
+    return this.ticketModel.findAll({include :{all: true}, where:{user_id: id}});
+  }
+  
 
   async create(createTicketDto: any): Promise<Ticket> {
     return this.ticketModel.create(createTicketDto);

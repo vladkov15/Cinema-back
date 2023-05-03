@@ -20,7 +20,7 @@ export class SeatController {
   }
 
   @Post()
-  async create(@Body() seatData: Seat[]): Promise<Seat> {
+  async create(@Body() seatData: Seat): Promise<Seat> {
     return this.seatService.create(seatData);
   }
 }
