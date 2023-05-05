@@ -36,6 +36,9 @@ export class Session extends Model<Session, SessionCreationAttributes> {
   @Column({ type: DataType.DATE, allowNull: false })
   end_time: Date;
 
+  @Column({ type: DataType.DOUBLE, allowNull: false })
+  price: number;
+
   @Column({ type: DataType.DATE, allowNull: false })
   booking_expiry: Date;
 

@@ -20,6 +20,12 @@ export class SessionsController {
     console.log(sessionId);
     return this.sessionsService.findOneBySessionId(sessionId);
   }
+
+  @Get('/sessions/session/:id')
+  async findOneByIdSession(@Param('id') id: number): Promise<Session> {
+  
+    return this.sessionsService.findOne(id);
+  }
   
   @Get('/date')
   async findAllByDate(@Query('date') date: string): Promise<Session[]> {

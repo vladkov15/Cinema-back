@@ -58,6 +58,9 @@ export class Booking extends Model<Booking, BookingCreationAttributes> {
   @Column({ type: DataType.BOOLEAN, allowNull: false })
   pay: boolean;
 
+  @Column({ type: DataType.DOUBLE, allowNull: false })
+  price: number;
+
   @Column({ type: DataType.DATE, allowNull: false })
   booking_expiry: Date;
 
