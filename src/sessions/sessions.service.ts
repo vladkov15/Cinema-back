@@ -2,11 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Session } from './sessions.model';
 import sequelize, { Op } from 'sequelize';
+import { Seat } from 'src/seats/seats.model';
 
 
 @Injectable()
 export class SessionsService {
-  constructor(@InjectModel(Session) private readonly sessionModel: typeof Session) {}
+  constructor(@InjectModel(Session) private readonly sessionModel: typeof Session, @InjectModel(Seat)
+  private seatModel: typeof Seat) {}
 
   async findAll(): Promise<Session[]> {
     return this.sessionModel.findAll({include :{all: true}});
@@ -48,7 +50,14 @@ export class SessionsService {
   }
 
   async remove(id: number): Promise<void> {
-    const session = await this.sessionModel.findByPk(id);
-    await session.destroy();
+    const seats = await this.seatModel.findAll({where: {film_id: id}})
+    seats.map(async (i) => {
+      await i.destroy();
+    })
+    const session = await this.sessionModel.findAll({where:{film_id: id}});
+    session.map(async (e) => {
+      await e.destroy();
+    })
+     
   }
 }
