@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Delete,
   Res,
   UploadedFile,
   UseInterceptors,
@@ -36,6 +37,11 @@ export class FilmsController {
     console.log(id);
     
     return this.filmsService.getFilmById(id);
+  }
+  
+  @Delete(':id')
+  async remove(@Param('id') id: number): Promise<void> {
+    return this.filmsService.remove(id);
   }
 
   // @Post()
